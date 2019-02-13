@@ -20,7 +20,7 @@ Step 2 - Congigurazione Architettura
 - Installare e avviare Mininet http://mininet.org/download/
 - Avviare lo script miniedit.py presente nella cartella /miniedit/example/miniedit.py
 - Configurare l'architettura come nell'immagine (da sinistra a destra Edge-Fog1-Fog2-CCC).
-- Assegnare ad ogni host una rete diversa (Edge:10.0.1.0/24 Fog1:10.0.2.0/25 Fog2:10.0.2.0/128 CCC:10.0.3.0/24)
+- Assegnare ad ogni host una rete diversa (Edge:10.0.1.0/24 Fog1:10.0.2.0/25 Fog2:10.0.2.128/25 CCC:10.0.3.0/24)
 - Configurare il Controller SDN inserendo IP e porta (6633) del controller SDN.
 
 Step 3 - APP
