@@ -28,14 +28,14 @@ Step 3 - APP
 X=1: Prima soluzione
 X=2: Seconda soluzione
 
-EdgeX.c: invia una serie di interi ad uno dei due dispositivi Fog.
-FogX.c: una volta ricevuti una decina di interi ne viene fatta la media e inviata al Cloud Center.
-CCC.c: Salva la media in persistenza. (identico per entrambe le soluzioni)
-SDNAppX.c: Alla ricezione di un determinato segnale interviene sul traffico in corso.
-dropFog1.xml: Istruzioni per bloccare il traffico diretto verso il primo dispositivo di Fog.
-dropFog2.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di Edge diretto verso il secondo dispositivo di Fog.
-foward.xml: Inoltrare il traffico proveniente dai dispositivi di edge verso il secondo dispositivo di Fog.
-dropEdge.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di edge.
+- EdgeX.c: invia una serie di interi ad uno dei due dispositivi Fog.
+- FogX.c: una volta ricevuti una decina di interi ne viene fatta la media e inviata al Cloud Center.
+- CCC.c: Salva la media in persistenza. (identico per entrambe le soluzioni)
+- SDNAppX.c: Alla ricezione di un determinato segnale interviene sul traffico in corso.
+- dropFog1.xml: Istruzioni per bloccare il traffico diretto verso il primo dispositivo di Fog.
+- dropFog2.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di Edge diretto verso il secondo dispositivo di Fog.
+- foward.xml: Istruzioni per inoltrare il traffico proveniente dai dispositivi di edge verso il secondo dispositivo di Fog.
+- dropEdge.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di edge.
 
 Differenze tra soluzione1 e soluzione2: La prima instaura una connessione TCP  tra da Edge e il primo Fog, la seconda due connessioni UDP verso entrambi i fog (SDN instraderà il traffico verso solo uno dei due).
 
