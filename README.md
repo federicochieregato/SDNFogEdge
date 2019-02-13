@@ -40,7 +40,7 @@ dropEdge.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di
 Differenze tra soluzione1 e soluzione2: La prima instaura una connessione TCP  tra da Edge e il primo Fog, la seconda due connessioni UDP verso entrambi i fog (SDN instraderà il traffico verso solo uno dei due).
 
 - Avviare controller SDN e architettura Mininet
-- Lanciare gli applicativi, EdgeX.c, FogX.c, CCC.c) nei rispettivi Host mininet e l'applicativo SDNAPPX.c nell'host in cui è presente il controller SDN.
+- Lanciare gli applicativi (EdgeX.c, FogX.c, CCC.c) nei rispettivi Host mininet e l'applicativo SDNAPPX.c nell'host in cui è presente il controller SDN.
 - Simulare un traffico dati inserendo interi in input ad EdgeX.c
 - Assicurarsi che i file.xml siano configurati opportunamente.
 - Simulare una rilevazione d'attacco lanciando un segnale al processo che gestisce l'applicazione SDN.
