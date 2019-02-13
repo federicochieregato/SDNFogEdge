@@ -20,15 +20,29 @@ Step 2 - Congigurazione Architettura
 - Installare e avviare Mininet http://mininet.org/download/
 - Avviare lo script miniedit.py presente nella cartella /miniedit/example/miniedit.py
 - Configurare l'architettura come nell'immagine (da sinistra a destra Edge-Fog1-Fog2-CCC).
-- Assegnare ad ogni host una rete diversa
+- Assegnare ad ogni host una rete diversa (Edge:10.0.1.0/24 Fog1:10.0.2.0/25 Fog2:10.0.2.0/128 CCC:10.0.3.0/24)
 - Configurare il Controller SDN inserendo IP e porta (6633) del controller SDN.
 
 Step 3 - APP
 
-- Lanciare gli applicativi, EdgeX.c, FogX.c, CCC.c) nei rispettivi Host mininet e l'applicativo SDNAPPX.c (X=1 prima soluzione, X=2 seconda soluzione)
-- Simulare un traffico dati inserendo interi in input ad EdgeX.c
-- Simulare una rilevazione d'attacco lanciando un segnale al processo che gestisce l'applicazione SDN.
-- SIGUSR1 bloccherà il traffico diretto verso il primo fog, l'applicazione instaurerà un nuova connessione verso il secondo.
-- SIGUSR2 bloccherà il traffico proveniente dal dispositivo di edge.
+X=1: Prima soluzione
+X=2: Seconda soluzione
 
-Differenze tra soluzione1 e soluzione2: La prima instaura una connessione TCP da Edge al primo Fog, la seconda due connessioni UDP verso entrambi i fog (SDN instraderà il traffico verso solo uno dei due).
+EdgeX.c: invia una serie di interi ad uno dei due dispositivi Fog.
+FogX.c: una volta ricevuti una decina di interi ne viene fatta la media e inviata al Cloud Center.
+CCC.c: Salva la media in persistenza. (identico per entrambe le soluzioni)
+SDNAppX.c: Alla ricezione di un determinato segnale interviene sul traffico in corso.
+dropFog1.xml: Istruzioni per bloccare il traffico diretto verso il primo dispositivo di Fog.
+dropFog2.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di Edge diretto verso il secondo dispositivo di Fog.
+foward.xml: Inoltrare il traffico proveniente dai dispositivi di edge verso il secondo dispositivo di Fog.
+dropEdge.xml: Istruzioni per bloccare il traffico proveniente dai dispositivi di edge.
+
+Differenze tra soluzione1 e soluzione2: La prima instaura una connessione TCP  tra da Edge e il primo Fog, la seconda due connessioni UDP verso entrambi i fog (SDN instraderà il traffico verso solo uno dei due).
+
+- Avviare controller SDN e architettura Mininet
+- Lanciare gli applicativi, EdgeX.c, FogX.c, CCC.c) nei rispettivi Host mininet e l'applicativo SDNAPPX.c nell'host in cui è presente il controller SDN.
+- Simulare un traffico dati inserendo interi in input ad EdgeX.c
+- Assicurarsi che i file.xml siano configurati opportunamente.
+- Simulare una rilevazione d'attacco lanciando un segnale al processo che gestisce l'applicazione SDN.
+- SIGUSR1 bloccherà il traffico diretto verso il primo fog, l'applicazione SDN instaurerà un nuova connessione verso il secondo.
+- SIGUSR2 bloccherà il traffico proveniente dal dispositivo di edge.
