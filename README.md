@@ -1,5 +1,5 @@
 # SDNFogEdge
-Design of tools for the management of fog / edge computing architectures using SDN
+Progetto di strumenti per la gestione di architetture fog/edge computing attraverso SDN
 
 L'obbiettivo che si pone questo progetto consiste nel trovare possibili soluzioni di sicurezza in un'architettura di Fog/Edge computing attraverso l'implementazione di Software-Defined Network.
 
