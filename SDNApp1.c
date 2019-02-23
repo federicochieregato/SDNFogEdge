@@ -19,7 +19,6 @@ int main(int argc, char *argv[]){
 	signal(SIGUSR2, handler);
 	signal(SIGCHLD, handler);
 	printf("In attesa di un segnale...\n");
-	pause(); //Attesa segnale;
 	while(1)
 		wait(&status); //Attesa terminazione figlio
 
@@ -31,6 +30,7 @@ void handler(int signum){
 		printf("Blocco traffico diretto verso Fog1\n");
 		if(fork()==0){
 			execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@dropFog1.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/1",(char *)0 );
+			//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml
 		}
 
 	}
@@ -39,11 +39,11 @@ void handler(int signum){
 		printf("Blocco traffico proveniente da dispositivi Edge\n");
 		if(fork()==0){
 			execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@dropEdge.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/2",(char *)0 );
+			//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml
 		}
 	}
 	else if(signum==SIGCHLD){
 		printf("In attesa di altri segnali...\n");
-		pause(); //In attesa di altri segnali
 	}
 
 }
