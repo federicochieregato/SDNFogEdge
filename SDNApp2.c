@@ -21,6 +21,7 @@ int main(int argc, char *argv[]){
 	if(fork()==0){ //figlio 1
 		printf("Blocco Traffico diretto verso Fog2\n");
 		execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@dropFog2.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/1",(char *)0 );
+		//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml
 	}
 	while(1)
 		wait(&statusPadre); //Attesa terminazione figlii
@@ -35,7 +36,8 @@ void handlerPadre(int signum){
 			if(fork()==0){ //nipote
 				printf("Blocco traffico diretto verso Fog1\n");
 				execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@dropFog1.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/2",(char *)0 ); 
-				}
+				//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml	
+			}
 			wait(&statusFiglio); // attende terminazione nipote 
 		}
 	}
@@ -44,12 +46,12 @@ void handlerPadre(int signum){
 		printf("Blocco traffico proveniente da dispositivi Edge\n");
 		if(fork()==0){ //figlio 3
 			execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@dropEdge.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/4",(char *)0 );
+			//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml
 		} 
 
 	}
 	else if(signum==SIGCHLD){
 		printf("In attesa di altri segnali...\n");
-		pause(); 
 	}
 
 }
@@ -57,6 +59,6 @@ void handlerPadre(int signum){
 void handlerFiglio(int signum){
 	printf("Ridirigo traffico verso Fog2\n");
 	execl("/usr/bin/curl","curl","-u","admin:admin","-H","Content-Type: application/yang.data+xml", "-H", "Accept:application/XML", "-X", "PUT", "-d","@forward.xml","http://192.168.56.1:8181/restconf/config/opendaylight-inventory:nodes/node/openflow:6/table/0/flow/3",(char *)0 ); 
-
+	//assicurarsi che la table e l'id presenti nella URI corrispondando a table e id del file.xml
 }
 
