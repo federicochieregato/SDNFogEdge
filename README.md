@@ -13,7 +13,7 @@ Step 1 - Configurazione Opendaylight
 
 - Scaricare controller Opendaylight https://docs.opendaylight.org/en/stable-fluorine/downloads.html
 - Assicurarsi di avere JDK 1.8 nel PC ed avviare il controller attraverso il comando ./bin/karaf
-- Scaricare le features l2switch, dlux e restconf
+- Da console karaf installare le features l2switch, dlux e restconf
 
 Step 2 - Congigurazione Architettura
 
